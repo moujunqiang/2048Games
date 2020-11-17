@@ -15,6 +15,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     public static MainActivity mainActivity = null;
+    private TextView Score;
     public static int score = 0;//当前得分
     private Button restart;
     private GameView gameView;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Score = (TextView) findViewById(R.id.Score);
 
         gameView = (GameView)findViewById(R.id.gameView);
         restart = (Button) findViewById(R.id.restart);
@@ -39,8 +41,50 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
     }
 
+    public static MainActivity getMainActivity() {
+        return mainActivity;
+    }
+
+    //分数清零
+    public void clearScore() {
+        score = 0;
+        showScore();
+    }
+
+
+
+    //显示当前得分
+    public void showScore() {
+        Score.setText(score + "");
+    }
+
+    @Override
+    public void onBackPressed() {
+        createExitTipDialog();
+    }
+
+    private void createExitTipDialog() {
+        new AlertDialog.Builder(MainActivity.this)
+                .setMessage("确认退出吗？")
+                .setTitle("提示")
+                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                        finish();
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .show();
+    }
 
 }
 

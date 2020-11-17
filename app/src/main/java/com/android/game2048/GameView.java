@@ -18,7 +18,6 @@ public class GameView extends GridLayout {
     public static Card[][] cards = new Card[4][4];//4×4=16张卡片
     private static List<Point> emptyPoints = new ArrayList<Point>();//空卡片（数值为0）位置
     public int num[][] = new int[4][4];//用于后退一步
-    public int score;//用于后退一步
     public boolean hasTouched = false;
 
     public GameView(Context context) {
@@ -84,6 +83,7 @@ public class GameView extends GridLayout {
 
     //开始游戏
     public static void startGame() {
+        MainActivity.getMainActivity().clearScore();
         for(int y=0;y<4;++y) {
             for(int x=0;x<4;++x) {
                 cards[x][y].setNum(0);
@@ -245,7 +245,6 @@ public class GameView extends GridLayout {
                 hasTouched = true;
             }
 
-            score = MainActivity.score;
 
             for(int y=0;y<4;++y) {
                 for(int x=0;x<4;++x) {
