@@ -1,44 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/rl_score"
+    <LinearLayout
+        android:id="@+id/topPanel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="20dp">
+        android:layout_height="80dp"
+        android:layout_margin="20dp"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_restart"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="当前得分："
+                android:textColor="#FF0000" />
+
+            <TextView
+                android:id="@+id/Score"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="#FF0000" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/maxtv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="最高记录："
+                android:textColor="#FF0000" />
+
+            <TextView
+                android:id="@+id/maxScore"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textColor="#FF0000" />
+
+            <ImageView
+                android:id="@+id/share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomPanel"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/restart"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="40dp"
-            android:text="@string/love2048"
-            android:textColor="@color/light_green"
-            android:textSize="36sp"
-            android:textStyle="bold" />
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="#87CEEB"
+            android:text="重新开始" />
 
 
 
-    </RelativeLayout>
+
+    </LinearLayout>
 
 
-    <RelativeLayout
+    <com.android.game2048.GameView
+        android:id="@+id/gameView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/rl_score"
-        android:layout_margin="5dp"
-        android:background="@drawable/bg_round_corner_alpha_green">
-
-        <love.smartalk.game2048.widget.Love2048Layout
-            android:id="@+id/ll_game_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp" />
-    </RelativeLayout>
-
+        android:layout_below="@+id/topPanel"
+        ></com.android.game2048.GameView>
 
 </RelativeLayout>
