@@ -84,7 +84,6 @@ public class GameView extends GridLayout {
 
     //开始游戏
     public static void startGame() {
-        MainActivity.getMainActivity().clearScore();
         for(int y=0;y<4;++y) {
             for(int x=0;x<4;++x) {
                 cards[x][y].setNum(0);
@@ -115,7 +114,6 @@ public class GameView extends GridLayout {
                             //合并卡片
                             cards[x][y].setNum(cards[x][y].getNum()*2);
                             cards[x1][y].setNum(0);
-                            MainActivity.getMainActivity().addScore(cards[x][y].getNum());
                             b = true;
                         }
                         //遇到非空卡片，则（x，y）无需继续比较
@@ -146,7 +144,6 @@ public class GameView extends GridLayout {
                         } else if (cards[x][y].equals(cards[x1][y])) {
                             cards[x][y].setNum(cards[x][y].getNum()*2);
                             cards[x1][y].setNum(0);
-                            MainActivity.getMainActivity().addScore(cards[x][y].getNum());
                             b = true;
                         }
                         break;
@@ -175,7 +172,6 @@ public class GameView extends GridLayout {
                         } else if (cards[x][y].equals(cards[x][y1])) {
                             cards[x][y].setNum(cards[x][y].getNum()*2);
                             cards[x][y1].setNum(0);
-                            MainActivity.getMainActivity().addScore(cards[x][y].getNum());
                             b = true;
                         }
                         break;
@@ -204,7 +200,6 @@ public class GameView extends GridLayout {
                         } else if (cards[x][y].equals(cards[x][y1])) {
                             cards[x][y].setNum(cards[x][y].getNum()*2);
                             cards[x][y1].setNum(0);
-                            MainActivity.getMainActivity().addScore(cards[x][y].getNum());
                             b = true;
                         }
                         break;
@@ -235,15 +230,7 @@ public class GameView extends GridLayout {
                 }
             }
         }
-        //游戏结束
-        if (isOver) {
-            new AlertDialog.Builder(getContext()).setTitle("很遗憾，游戏结束啦").setMessage("当前得分为"+ MainActivity.score+"，再接再厉哦！").setPositiveButton("点击此处再玩一局", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    startGame();
-                }
-            }).show();
-        }
+
     }
 
     //游戏方格部分滑动监听
