@@ -3,12 +3,15 @@ package com.android.game2048;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 public class MainActivity extends Activity {
@@ -23,7 +26,10 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
-
+        ScoreBean bean = new ScoreBean();
+        bean.setScore(20);
+        bean.setCreateTime(new SimpleDateFormat("yyyy-MM-dd hh:mm").format(new Date()));
+        new ScoreDao(this).insertNote(bean);
         findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,6 +43,12 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 current = 0;
                 init();
+            }
+        });
+        findViewById(R.id.rank).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,RankActivity.class));
             }
         });
     }
@@ -327,9 +339,19 @@ public class MainActivity extends Activity {
                         public void onClick(DialogInterface dialog, int which) {
                             init();
                             dialog.dismiss();
+                            ScoreBean bean = new ScoreBean();
+                            bean.setScore(current);
+                            bean.setCreateTime(new SimpleDateFormat("yyyy-MM-dd hh:mm").format(new Date()));
+                            new ScoreDao(MainActivity.this).insertNote(bean);
                         }
                     })
                     .create();  //创建对话框
+            dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    init();
+                }
+            });
             dialog.show();  //显示对话框
         }
     }
